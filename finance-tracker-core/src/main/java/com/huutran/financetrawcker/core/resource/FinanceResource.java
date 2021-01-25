@@ -11,4 +11,6 @@ public interface FinanceResource {
     FinanceResource withDraw(BigDecimal amount);
 
     FinanceResource deposit(BigDecimal amount);
+
+
 }

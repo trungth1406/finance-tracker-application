@@ -5,9 +5,15 @@ import java.math.BigDecimal;
 public abstract class BaseFinanceResource implements FinanceResource {
 
     protected BigDecimal totalAmount;
+    protected String name;
 
     public BaseFinanceResource(BigDecimal totalAmount) {
         this.totalAmount = totalAmount;
+    }
+
+    public BaseFinanceResource(BigDecimal totalAmount, String name) {
+        this.totalAmount = totalAmount;
+        this.name = name;
     }
 
     @Override
@@ -32,5 +38,13 @@ public abstract class BaseFinanceResource implements FinanceResource {
     public FinanceResource deposit(BigDecimal amount) {
         this.totalAmount = this.totalAmount.add(amount);
         return this;
+    }
+
+    public BigDecimal getTotalAmount() {
+        return totalAmount;
+    }
+
+    public String getName() {
+        return name;
     }
 }
