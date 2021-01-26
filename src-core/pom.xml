@@ -10,7 +10,9 @@
         <artifactId>finance-tracker</artifactId>
         <version>1.0.0</version>
     </parent>
+    <packaging>pom</packaging>
 
+    <name>finance-tracker-core</name>
     <artifactId>finance-tracker-core</artifactId>
     <version>1.0-SNAPSHOT</version>
 
