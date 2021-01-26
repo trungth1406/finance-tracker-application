@@ -1,2 +1,2 @@
-# finance-tracker-java-api
-Rest API for finance-tracker
+# finance-tracker-application
+Managing your personal finance with this application
