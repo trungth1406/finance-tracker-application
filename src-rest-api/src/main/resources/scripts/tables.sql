@@ -1,18 +1,8 @@
-create table FINANCE_TRACKER.ACCOUNT
-(
-    ID BIGINT auto_increment
-        constraint ACCOUNT_PK
-        unique,
-    NAME VARCHAR2(500) not null,
-    TOTAL_AMOUNT DECIMAL not null,
-    FK_RESOURCE BIGINT not null,
-    constraint FK_RESOURCE
-        foreign key (FK_RESOURCE) references FINANCE_TRACKER.MONEY_RESOURCE (ID)
-            on update cascade on delete cascade
-);
 
 
-create table FINANCE_TRACKER.MONEY_RESOURCE
+create schema  FINANCETRACKER;
+
+create table FINANCETRACKER.MONEY_RESOURCE
 (
     ID BIGINT auto_increment,
     NAME VARCHAR(500) not null,
@@ -21,7 +11,24 @@ create table FINANCE_TRACKER.MONEY_RESOURCE
         primary key (ID)
 );
 
-create table FINANCE_TRACKER.TRANSACTION
+
+create table FINANCETRACKER.ACCOUNT
+(
+    ID BIGINT auto_increment
+        constraint ACCOUNT_PK
+        unique,
+    NAME VARCHAR2(500) not null,
+    TOTAL_AMOUNT DECIMAL not null,
+    FK_RESOURCE BIGINT not null,
+    constraint FK_RESOURCE
+        foreign key (FK_RESOURCE) references MONEY_RESOURCE (ID)
+            on update cascade on delete cascade
+);
+
+
+
+
+create table FINANCETRACKER.TRANSACTION
 (
     ID BIGINT auto_increment,
     DESCRIPTION VARCHAR2(1000),
@@ -33,9 +40,9 @@ create table FINANCE_TRACKER.TRANSACTION
     constraint TRANSACTION_PK
         primary key (ID),
     constraint FK_ACCOUNT
-        foreign key (FK_ACCOUNT) references FINANCE_TRACKER.ACCOUNT (ID),
+        foreign key (FK_ACCOUNT) references ACCOUNT (ID),
     constraint FK_TRANS_RESOURCE
-        foreign key (FK_RESOURCE) references FINANCE_TRACKER.MONEY_RESOURCE (ID)
+        foreign key (FK_RESOURCE) references MONEY_RESOURCE (ID)
 );
 
 

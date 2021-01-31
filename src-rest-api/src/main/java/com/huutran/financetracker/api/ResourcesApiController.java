@@ -1,14 +1,18 @@
 package com.huutran.financetracker.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.huutran.financetracker.dao.MoneyResource;
 import com.huutran.financetracker.model.AccountRequest;
 import com.huutran.financetracker.model.AccountResponse;
 import com.huutran.financetracker.model.ResourceResponse;
+import com.huutran.financetracker.services.BaseService;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,10 +35,14 @@ public class ResourcesApiController implements ResourcesApi {
 
     private final HttpServletRequest request;
 
-    @org.springframework.beans.factory.annotation.Autowired
-    public ResourcesApiController(ObjectMapper objectMapper, HttpServletRequest request) {
+    final BaseService<MoneyResource,Long> resourceService;
+
+    @Autowired
+    public ResourcesApiController(ObjectMapper objectMapper, HttpServletRequest request,
+                                  BaseService<MoneyResource, Long> resourceService) {
         this.objectMapper = objectMapper;
         this.request = request;
+        this.resourceService = resourceService;
     }
 
     public ResponseEntity<Void> addRelatedAccount(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("id") Integer id, @Parameter(in = ParameterIn.DEFAULT, description = "Add related account to resource", schema=@Schema()) @Valid @RequestBody AccountRequest body) {
@@ -71,17 +79,8 @@ public class ResourcesApiController implements ResourcesApi {
     }
 
     public ResponseEntity<List<ResourceResponse>> getResources() {
-        String accept = request.getHeader("Accept");
-        if (accept != null && accept.contains("application/json")) {
-            try {
-                return new ResponseEntity<List<ResourceResponse>>(objectMapper.readValue("[ {\n  \"total_amount\" : \"100000.00\",\n  \"name\" : \"Widget Adapter\",\n  \"id\" : 1,\n  \"remain_amount\" : \"100000.00\",\n  \"total_account\" : 2\n}, {\n  \"total_amount\" : \"100000.00\",\n  \"name\" : \"Widget Adapter\",\n  \"id\" : 1,\n  \"remain_amount\" : \"100000.00\",\n  \"total_account\" : 2\n} ]", List.class), HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<List<ResourceResponse>>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-        }
-
-        return new ResponseEntity<List<ResourceResponse>>(HttpStatus.NOT_IMPLEMENTED);
+        ResponseEntity<List<Object>> listResponseEntity = this.resourceService.searchAll(Pageable.unpaged());
+        return new ResponseEntity(listResponseEntity,HttpStatus.OK);
     }
 
     public ResponseEntity<Void> resourcesIdRelatedAccountsAccountIdDelete(@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("id") Integer id,@Parameter(in = ParameterIn.PATH, description = "", required=true, schema=@Schema()) @PathVariable("account_id") Integer accountId) {

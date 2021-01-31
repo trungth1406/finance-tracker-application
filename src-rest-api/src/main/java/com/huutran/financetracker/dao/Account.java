@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "ACCOUNT")
+@Table(schema = "FINANCETRACKER", name = "ACCOUNT")
 public class Account {
 
     @Id
@@ -12,7 +12,7 @@ public class Account {
     private Long id;
 
     @Column(name = "NAME")
-    private BigDecimal name;
+    private String name;
 
     @Column(name = "TOTAL_AMOUNT")
     private BigDecimal totalAmount;
@@ -28,11 +28,11 @@ public class Account {
         this.id = id;
     }
 
-    public BigDecimal getName() {
+    public String getName() {
         return this.name;
     }
 
-    public void setName(BigDecimal name) {
+    public void setName(String name) {
         this.name = name;
     }
 

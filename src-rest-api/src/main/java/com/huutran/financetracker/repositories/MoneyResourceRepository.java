@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import com.huutran.financetracker.dao.MoneyResource;
 
 @Repository
-public interface MoneyResourceRepository extends CrudRepository<MoneyResource,Long>,PagingAndSortingRepository<MoneyResource,Long>,JpaSpecificationExecutor<MoneyResource>{
+public interface MoneyResourceRepository extends CrudRepository<MoneyResource,Long>,
+        PagingAndSortingRepository<MoneyResource,Long>,JpaSpecificationExecutor<MoneyResource>{
 
 }

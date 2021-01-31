@@ -2,22 +2,23 @@ package com.huutran.financetracker.dao;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Entity
-@Table(name = "TRANSACTION")
+@Table(schema = "FINANCETRACKER", name = "TRANSACTION")
 public class Transaction {
     @Id
     @Column(name = "ID")
     private Long id;
 
     @Column(name = "DESCRIPTION")
-    private BigDecimal description;
+    private String description;
 
     @Column(name = "AMOUNT")
     private BigDecimal amount;
 
     @Column(name = "DATE_OF_EXECUTION")
-    private BigDecimal dateOfExecution;
+    private LocalDate dateOfExecution;
 
     @Column(name = "FK_RESOURCE")
     private Long fkResource;
@@ -36,11 +37,11 @@ public class Transaction {
         this.id = id;
     }
 
-    public BigDecimal getDescription() {
+    public String getDescription() {
         return this.description;
     }
 
-    public void setDescription(BigDecimal description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
@@ -52,11 +53,11 @@ public class Transaction {
         this.amount = amount;
     }
 
-    public BigDecimal getDateOfExecution() {
+    public LocalDate getDateOfExecution() {
         return this.dateOfExecution;
     }
 
-    public void setDateOfExecution(BigDecimal dateOfExecution) {
+    public void setDateOfExecution(LocalDate dateOfExecution) {
         this.dateOfExecution = dateOfExecution;
     }
 

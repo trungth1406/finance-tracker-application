@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "MONEY_RESOURCE")
+@Table(schema = "FINANCETRACKER",name = "MONEY_RESOURCE")
 public class MoneyResource {
     @Id
     @Column(name = "ID")
@@ -15,6 +15,9 @@ public class MoneyResource {
 
     @Column(name = "TOTAL_AMOUNT")
     private BigDecimal totalAmount;
+
+    public MoneyResource() {
+    }
 
     public Long getId() {
         return this.id;

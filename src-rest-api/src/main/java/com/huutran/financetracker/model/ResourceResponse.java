@@ -32,6 +32,9 @@ public class ResourceResponse   {
   @JsonProperty("remain_amount")
   private String remainAmount = null;
 
+  public ResourceResponse() {
+  }
+
   public ResourceResponse id(BigDecimal id) {
     this.id = id;
     return this;
