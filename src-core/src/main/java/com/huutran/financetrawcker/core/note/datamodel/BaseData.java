@@ -1,13 +1,12 @@
-package com.huutran.financetrawcker.core.note;
+package com.huutran.financetrawcker.core.note.datamodel;
 
-public class NoteData {
+public  abstract  class BaseData {
+
     private Integer id;
-    private byte[] noteData;
     private String title;
 
-    public NoteData(Integer id, byte[] noteData, String title) {
+    protected BaseData(Integer id, String title) {
         this.id = id;
-        this.noteData = noteData;
         this.title = title;
     }
 
@@ -17,14 +16,6 @@ public class NoteData {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public byte[] getNoteData() {
-        return noteData;
-    }
-
-    public void setNoteData(byte[] noteData) {
-        this.noteData = noteData;
     }
 
     public String getTitle() {
