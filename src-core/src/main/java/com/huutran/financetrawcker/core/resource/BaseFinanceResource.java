@@ -7,11 +7,11 @@ public abstract class BaseFinanceResource implements FinanceResource {
     protected BigDecimal totalAmount;
     protected String name;
 
-    public BaseFinanceResource(BigDecimal totalAmount) {
+    protected BaseFinanceResource(BigDecimal totalAmount) {
         this.totalAmount = totalAmount;
     }
 
-    public BaseFinanceResource(BigDecimal totalAmount, String name) {
+    protected BaseFinanceResource(BigDecimal totalAmount, String name) {
         this.totalAmount = totalAmount;
         this.name = name;
     }
